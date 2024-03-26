@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Matching Companies with Programming Skills</title>
+    <style>
+      body {
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+      }
+
+      #matchTable {
+        margin: 20px auto;
+        border-collapse: collapse;
+        width: 80%;
+        background-color: #fff;
+      }
+
+      #matchTable th,
+      #matchTable td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+      }
+
+      #matchTable th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+      }
+
+      #matchTable tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      #matchTable tbody tr:hover {
+        background-color: #e2e2e2;
+      }
+
+      #internTable {
+        margin: 20px auto;
+        border-collapse: collapse;
+        width: 80%;
+        background-color: #fff;
+      }
+
+      #internTable th,
+      #internTable td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+      }
+
+      #internTable th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+      }
+
+      #internTable tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      #internTable tbody tr:hover {
+        background-color: #e2e2e2;
+      }
+
+      .company-logo {
+        width: 50px; /* Adjust the width as needed */
+        height: auto;
+        display: block; /* Center the image */
+        margin: auto; /* Center the image */
+        transition: transform 0.3s ease; /* Add transition effect */
+      }
+
+      .company-logo:hover {
+        transform: scale(1.1); /* Scale up the image on hover */
+      }
+
+      .intern-image {
+        width: 50px; /* Adjust the width as needed */
+        height: auto;
+        display: block; /* Center the image */
+        margin: auto; /* Center the image */
+        transition: transform 0.3s ease; /* Add transition effect */
+      }
+
+      .intern-image:hover {
+        transform: scale(1.1); /* Scale up the image on hover */
+      }
+
+      body {
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      #matchTable,
+      #internTable {
+        margin: 20px auto;
+        border-collapse: collapse;
+        width: 80%;
+        background-color: #fff;
+      }
+
+      #matchTable th,
+      #matchTable td,
+      #internTable th,
+      #internTable td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+      }
+
+      #matchTable th,
+      #internTable th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+      }
+
+      #matchTable tbody tr:nth-child(even),
+      #internTable tbody tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      #matchTable tbody tr:hover,
+      #internTable tbody tr:hover {
+        background-color: #e2e2e2;
+      }
+
+      .company-logo,
+      .intern-image {
+        width: 50px;
+        height: auto;
+        display: block;
+        margin: auto;
+        transition: transform 0.3s ease;
+      }
+
+      .company-logo:hover,
+      .intern-image:hover {
+        transform: scale(1.1);
+      }
+
+      /* Form styles */
+      form {
+        width: 80%;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      label {
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      select {
+        width: 100%;
+        padding: 8px;
+        margin-top: 6px;
+        margin-bottom: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      button[type="submit"] {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      button[type="submit"]:hover {
+        background-color: #45a049;
+      }
+
+       /* delete button */
+    .delete-button {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .delete-button:hover {
+      background-color: #c82333;
+    }
+
+    .delete-button:active {
+      background-color: #bd2130;
+    }
+    </style>
+  </head>
+  <body>
+    <!-- Intern form -->
+    <form id="internForm">
+      <label for="internName">Intern Name:</label>
+      <input
+        type="text"
+        id="internName"
+        name="internName"
+        required
+      /><br /><br />
+
+      <label for="internImage">Intern Image URL:</label>
+      <input
+        type="text"
+        id="internImage"
+        name="internImage"
+        required
+      /><br /><br />
+
+      <label for="internCompany">Company:</label>
+      <select id="internCompany" name="internCompany" required>
+        <!-- Company options will be populated dynamically --></select
+      ><br /><br />
+
+      <label for="internSkill">Programming Skill:</label>
+      <select id="internSkill" name="internSkill" required>
+        <!-- Skill options will be populated dynamically --></select
+      ><br /><br />
+
+      <button type="submit">Add Intern</button>
+    </form>
+
+    <table id="matchTable">
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Company Logo</th>
+          <th>Programming Skill</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script>
+      // สร้างบริษัท
+      let companies = [
+        {
+          name: "Tech Innovations",
+          logo: "img/logo1.webp",
+          skills: ["Web Design", "Frontend Development"],
+        },
+        {
+          name: "Data Solutions Inc.",
+          logo: "img/logo2.jpg",
+          skills: ["Data Analysis", "Machine Learning"],
+        },
+        {
+          name: "Cloud Computing Co. A",
+          logo: "img/logo3.jpg", // Add the logo path for the new company
+          skills: ["Cloud Computing", "Backend Development"], // Add the skills for the new company
+        },
+      ];
+
+      // สร้างสมมุติสกิลการเขียนโปรแรม
+      let programmingSkills = [
+        { name: "JavaScript", type: "Frontend Development" },
+        { name: "Python", type: "Machine Learning" },
+        { name: "Java", type: "Backend Development" },
+      ];
+
+      // ฟังก์ชันสำหรับจับคู่บริษัทและสมมุติสกิลการเขียนโปรแรม
+      function matchCompaniesAndSkills(companies, skills) {
+        let matches = [];
+
+        companies.forEach((company) => {
+          skills.forEach((skill) => {
+            if (company.skills.includes(skill.type)) {
+              matches.push({
+                company: company.name,
+                logo: company.logo,
+                skill: skill.name,
+              });
+            }
+          });
+        });
+
+        return matches;
+      }
+
+      // ทำการจับคู่บริษัทและสมมุติสกิลการเขียนโปรแรม
+      let matchedCompaniesAndSkills = matchCompaniesAndSkills(
+        companies,
+        programmingSkills
+      );
+
+      // เขียนข้อมูลลงในตาราง
+      let matchTable = document
+        .getElementById("matchTable")
+        .getElementsByTagName("tbody")[0];
+      matchedCompaniesAndSkills.forEach((match) => {
+        let row = matchTable.insertRow(-1);
+        let companyCell = row.insertCell(0);
+        let logoCell = row.insertCell(1);
+        let skillCell = row.insertCell(2);
+        companyCell.textContent = match.company;
+        let logo = document.createElement("img");
+        logo.src = match.logo;
+        logo.alt = match.company + " Logo";
+        logo.classList.add("company-logo");
+        logoCell.appendChild(logo);
+        skillCell.textContent = match.skill;
+      });
+
+      // สร้างข้อมูลของนักศึกษาฝึกงาน
+      let interns = [
+        {
+          name: "John",
+          skill: "JavaScript",
+          company: "Tech Innovations",
+          image: "img/2.webp",
+        },
+        {
+          name: "Alice",
+          skill: "Python",
+          company: "Data Solutions Inc.",
+          image: "img/1.jpg",
+        },
+        {
+          name: "Bob",
+          skill: "Java",
+          company: "Cloud Computing Co. A",
+          image: "img/4.jpg",
+        },
+        {
+          name: "Emily",
+          skill: "JavaScript",
+          company: "Tech Innovations",
+          image: "img/3.webp",
+        },
+        {
+          name: "Sam",
+          skill: "JavaScript",
+          company: "Tech Innovations",
+          image: "img/5.webp",
+        },
+      ];
+
+      // เขียนข้อมูลของนักศึกษาฝึกงานลงในตาราง
+      let internTable = document.createElement("table");
+      internTable.id = "internTable";
+      internTable.innerHTML =
+        "<tr><th>Intern Name</th><th>Intern Image</th><th>Company</th><th>Programming Skill</th></tr>";
+      interns.forEach((intern) => {
+        let row = internTable.insertRow(-1);
+        let nameCell = row.insertCell(0);
+        let imageCell = row.insertCell(1);
+        let companyCell = row.insertCell(2);
+        let skillCell = row.insertCell(3);
+        nameCell.textContent = intern.name;
+        let image = document.createElement("img");
+        image.src = intern.image;
+        image.alt = intern.name + " Image";
+        image.classList.add("intern-image");
+        imageCell.appendChild(image);
+        companyCell.textContent = intern.company;
+        skillCell.textContent = intern.skill;
+      });
+      document.body.appendChild(internTable);
+
+      // Function to populate dropdown options
+      function populateDropdown(selectElement, options) {
+        selectElement.innerHTML = "";
+        options.forEach((option) => {
+          const optionElement = document.createElement("option");
+          optionElement.value = option;
+          optionElement.textContent = option;
+          selectElement.appendChild(optionElement);
+        });
+      }
+
+      // Populate company dropdown
+      const companyDropdown = document.getElementById("internCompany");
+      const companyOptions = companies.map((company) => company.name);
+      populateDropdown(companyDropdown, companyOptions);
+
+      // Populate skill dropdown
+      const skillDropdown = document.getElementById("internSkill");
+      const skillOptions = programmingSkills.map((skill) => skill.name);
+      populateDropdown(skillDropdown, skillOptions);
+
+      // Function to handle form submission
+      document
+        .getElementById("internForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          // Get form data
+          const internName = document.getElementById("internName").value;
+          const internImage = document.getElementById("internImage").value;
+          const internCompany = document.getElementById("internCompany").value;
+          const internSkill = document.getElementById("internSkill").value;
+
+          // Add intern to the interns array
+          interns.push({
+            name: internName,
+            skill: internSkill,
+            company: internCompany,
+            image: internImage,
+          });
+
+          // Update intern table
+          const internTable = document.getElementById("internTable");
+          const row = internTable.insertRow(-1);
+          const nameCell = row.insertCell(0);
+          const imageCell = row.insertCell(1);
+          const companyCell = row.insertCell(2);
+          const skillCell = row.insertCell(3);
+          nameCell.textContent = internName;
+          const image = document.createElement("img");
+          image.src = internImage;
+          image.alt = internName + " Image";
+          image.classList.add("intern-image");
+          imageCell.appendChild(image);
+          companyCell.textContent = internCompany;
+          skillCell.textContent = internSkill;
+        });
+
+      // Function to automatically match skills with companies
+      function autoMatchSkillsWithCompanies(
+        interns,
+        companies,
+        programmingSkills
+      ) {
+        // Match skills with companies for each intern
+        interns.forEach((intern) => {
+          const matchedCompany = companies.find(
+            (company) => company.name === intern.company
+          );
+          if (matchedCompany && matchedCompany.skills.includes(intern.skill)) {
+            // Update match table
+            const matchTable = document
+              .getElementById("matchTable")
+              .getElementsByTagName("tbody")[0];
+            const row = matchTable.insertRow(-1);
+            const companyCell = row.insertCell(0);
+            const logoCell = row.insertCell(1);
+            const skillCell = row.insertCell(2);
+            companyCell.textContent = matchedCompany.name;
+            const logo = document.createElement("img");
+            logo.src = matchedCompany.logo;
+            logo.alt = matchedCompany.name + " Logo";
+            logo.classList.add("company-logo");
+            logoCell.appendChild(logo);
+            skillCell.textContent = intern.skill;
+          }
+        });
+      }
+
+      // Automatically match skills with companies
+      autoMatchSkillsWithCompanies(interns, companies, programmingSkills);
+
+      
+    </script>
+    <!-- Intern table -->
+    <table id="internTable">
+      <!-- Intern table will be populated dynamically -->
+    </table>
+  </body>
+</html>
